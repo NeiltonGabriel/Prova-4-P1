@@ -1,0 +1,49 @@
+#include <stdio.h>
+#include <string.h>
+
+struct produtos
+{
+    char nome[50];
+    double preco;
+    int quantidade;
+};
+
+int main()
+{
+    double pagar = 0;
+    int quantidade_produtos;
+    scanf("%d", &quantidade_produtos);
+
+    struct produtos lista [quantidade_produtos];
+
+    for (int p = 0; p < quantidade_produtos; p++)
+    {
+        scanf(" %s %lf %d", lista[p].nome, &lista[p].preco, &lista[p].quantidade);
+    }
+
+    int compra;
+    scanf("%d", &compra);
+
+    while(compra > 0)
+    {
+        char temporaria[50];
+        scanf(" %s", temporaria);
+
+        for (int p = 0; p < quantidade_produtos; p++)
+        {
+            if (strcmp(temporaria, lista[p].nome) == 0)
+            {
+                if (lista[p].quantidade > 0)
+                {
+                    pagar += lista[p].preco;
+                    lista[p].quantidade--;
+                }
+            }
+        }
+        compra--;
+    }
+
+    printf("A sopa custou R$ %.2lf. Melhoras Ekul :(\n", pagar);
+
+    return 0;
+}
